@@ -12,10 +12,14 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+  final model = CityHistoryModel();
+
+
+  
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CityHistoryModel>(
-      create: (context) => CityHistoryModel(),
+    return ChangeNotifierProvider<CityHistoryModel>.value(
+      value: model,
       builder: (context, widget) {
         final contextRead = context.read<CityHistoryModel>();
         final contextWatch = context.watch<CityHistoryModel>();
@@ -23,7 +27,7 @@ class _CityScreenState extends State<CityScreen> {
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Column(
+              child: ListView(
                 children: [
                   TextField(
                     decoration: const InputDecoration(
@@ -38,14 +42,36 @@ class _CityScreenState extends State<CityScreen> {
                     },
                     onEditingComplete: () => contextRead.saveCity(context),
                   ),
+                  const SizedBox(height: 20),
                   TextButton(
                     onPressed: () => contextRead.saveCity(context),
                     child: const Text('Get Weather'),
                   ),
-                  Expanded(
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.blue[50],
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      width: double.infinity,
+                      height: 300,
                       child: CityHistoryView(
-                    contextWatch: contextWatch,
-                  )),
+                        contextWatch: contextWatch,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        child: const Text('Clear history'),
+                        onPressed: () =>
+                            contextRead.clearHistory(),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

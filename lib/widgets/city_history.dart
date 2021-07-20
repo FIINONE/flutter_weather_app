@@ -19,13 +19,19 @@ class CityHistoryView extends StatelessWidget {
       itemCount: cityCounter,
       itemBuilder: (context, int index) {
         final cityName = contextWatch.cityname[index].name.toUpperCase();
-        final color = index.isEven ? Colors.grey[200]! : Colors.white;
+        final color = index.isEven ? Colors.blue[100]! : Colors.blue[50];
         return Material(
           child: Ink(
             color: color,
             child: InkWell(
               splashColor: Colors.green,
-              child: Text('${index + 1}. $cityName'),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  '${index + 1}. $cityName',
+                  style: const TextStyle(fontSize: 32),
+                ),
+              ),
               onTap: () => context
                   .read<CityHistoryModel>()
                   .popCityfromHistory(index, context),

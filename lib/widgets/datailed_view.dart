@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DetailedView extends StatelessWidget {
   final AsyncSnapshot<WeatherModel> snapshot;
-  DetailedView({Key? key, required this.snapshot}) : super(key: key);
+  const DetailedView({Key? key, required this.snapshot}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

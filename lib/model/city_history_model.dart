@@ -9,6 +9,8 @@ class CityHistoryModel extends ChangeNotifier {
 
   var _city = <CityHistoryData>[];
 
+  CityHistoryData? citydata;
+
   CityHistoryModel() {
     _setup();
   }
@@ -21,16 +23,22 @@ class CityHistoryModel extends ChangeNotifier {
     final box = await Hive.openBox<CityHistoryData>('CityData');
     _city = box.values.toList();
     notifyListeners();
+    box.listenable().addListener(() {
+      _city = box.values.toList();
+      notifyListeners();
+    });
   }
 
   Future<void> saveCity(BuildContext context) async {
+    if (name.isEmpty) {
+      return;
+    }
     if (!Hive.isAdapterRegistered(0)) {
       Hive.registerAdapter(CityHistoryDataAdapter());
     }
     final box = await Hive.openBox<CityHistoryData>('CityData');
     final city = CityHistoryData(name: name);
     await box.add(city);
-    print(box.values);
     Navigator.pop(context, name);
   }
 
@@ -41,5 +49,14 @@ class CityHistoryModel extends ChangeNotifier {
     final box = await Hive.openBox<CityHistoryData>('CityData');
     final cityIndex = box.getAt(index)?.name;
     Navigator.pop(context, cityIndex);
+  }
+
+  Future<void> clearHistory() async {
+    if (!Hive.isAdapterRegistered(0)) {
+      Hive.registerAdapter(CityHistoryDataAdapter());
+    }
+    final box = await Hive.openBox<CityHistoryData>('CityData');
+    final keys = box.keys;
+    box.deleteAll(keys);
   }
 }

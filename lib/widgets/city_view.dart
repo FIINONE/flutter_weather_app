@@ -5,9 +5,9 @@ import 'package:flutter_lesson_1/model/weather_data_copy.dart';
 import 'package:flutter_lesson_1/utilities/weather_utilities.dart';
 
 class CityView extends StatelessWidget {
-  AsyncSnapshot<WeatherModel> snapshot;
+  final AsyncSnapshot<WeatherModel> snapshot;
 
-  CityView({Key? key, required this.snapshot}) : super(key: key);
+  const CityView({Key? key, required this.snapshot}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

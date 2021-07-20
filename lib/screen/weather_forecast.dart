@@ -3,8 +3,6 @@ import 'package:flutter_lesson_1/api/weather_api.dart';
 // import 'package:flutter_lesson_1/model/weather_ex.dart';
 // import 'package:flutter_lesson_1/model/weather_data.dart';
 import 'package:flutter_lesson_1/model/weather_data_copy.dart';
-import 'package:flutter_lesson_1/screen/location_screen.dart';
-import 'package:flutter_lesson_1/utilities/constants.dart';
 import 'package:flutter_lesson_1/widgets/city_view.dart';
 import 'package:flutter_lesson_1/widgets/daily_view.dart';
 import 'package:flutter_lesson_1/widgets/datailed_view.dart';
@@ -80,13 +78,14 @@ class _WeatherForecastScreenState extends State<WeatherForecastScreen> {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CityView(snapshot: snapshot),
+                const SizedBox(height: 10),
+                Expanded(child: CityView(snapshot: snapshot)),
                 const SizedBox(height: 20),
-                TempView(snapshot: snapshot),
+                Expanded(child: TempView(snapshot: snapshot)),
                 const SizedBox(height: 20),
-                DetailedView(snapshot: snapshot),
+                Expanded(child: DetailedView(snapshot: snapshot)),
                 const SizedBox(height: 20),
-                Expanded(child: DailyView(snapshot: snapshot)),
+                Expanded(flex: 2,child: DailyView(snapshot: snapshot)),
               ],
             );
           } else {

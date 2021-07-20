@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lesson_1/model/weather_data_copy.dart';
 
 class TempView extends StatelessWidget {
-  AsyncSnapshot<WeatherModel> snapshot;
+  final AsyncSnapshot<WeatherModel> snapshot;
 
-  TempView({
+  const TempView({
     Key? key,
     required this.snapshot,
   }) : super(key: key);

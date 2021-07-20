@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 // import 'package:flutter_lesson_1/model/weather_ex.dart';
@@ -9,7 +8,8 @@ import 'package:flutter_lesson_1/utilities/location.dart';
 import 'package:http/http.dart' as http;
 
 class WeatherApi {
-  Future<WeatherModel> fetchWeather({String? cityName = 'Tashkent', bool? isCity}) async {
+  Future<WeatherModel> fetchWeather(
+      {String? cityName = 'Tashkent', bool? isCity}) async {
     final Location location = Location();
 
     await location.getCurrentLocation();
@@ -39,8 +39,6 @@ class WeatherApi {
     log('request: ${uri.toString()}');
 
     final response = await http.get(uri);
-
-    print(response.body);
 
     if (response.statusCode == 200) {
       return WeatherModel.fromJson(response.body);

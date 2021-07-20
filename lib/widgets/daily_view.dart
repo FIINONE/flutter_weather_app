@@ -53,7 +53,7 @@ class DailyView extends StatelessWidget {
         );
       },
       separatorBuilder: (context, int index) {
-        return VerticalDivider(
+        return const VerticalDivider(
           thickness: 1,
         );
       },
