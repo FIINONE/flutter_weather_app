@@ -3,9 +3,12 @@ import 'package:flutter_lesson_1/model/weather_data_copy.dart';
 import 'package:flutter_lesson_1/screen/city_screen.dart';
 import 'package:flutter_lesson_1/screen/location_screen.dart';
 import 'package:flutter_lesson_1/screen/weather_forecast.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() {
-  runApp(MyApp());
+  Hive.initFlutter();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/': (context) => LocationScreen(),
+        LocationScreen.mainRoute: (context) => const LocationScreen(),
         WeatherForecastScreen.routeName: (context) {
           final location =
               ModalRoute.of(context)!.settings.arguments as WeatherModel;
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
             locationWeather: location,
           );
         },
-        '/city_screen': (context) => CityScreen(),
+        CityScreen.routeName: (BuildContext context) => const CityScreen(),
       },
       initialRoute: '/',
       debugShowCheckedModeBanner: false,

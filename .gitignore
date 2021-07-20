@@ -1,3 +1,6 @@
+# Ignore file
+api_token.dart
+
 # Miscellaneous
 *.class
 *.log

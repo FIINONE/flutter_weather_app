@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lesson_1/api/weather_api.dart';
+import 'package:flutter_lesson_1/model/weather_data_copy.dart';
 import 'package:flutter_lesson_1/screen/weather_forecast.dart';
 
 class LocationScreen extends StatefulWidget {
+  static const String mainRoute = '/';
   const LocationScreen({Key? key}) : super(key: key);
 
   @override
@@ -10,9 +12,9 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  void getLocationData() async {
+  Future<void> getLocationData() async {
     try {
-      var weatherInfo = await WeatherApi().fetchWeather();
+      final WeatherModel weatherInfo = await WeatherApi().fetchWeather();
       Navigator.pushNamed(context, WeatherForecastScreen.routeName,
           arguments: weatherInfo);
     } catch (e) {
